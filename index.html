@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Medical Pedigree Builder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="appbar">
+    <div id="topRow">
+      <div id="appTitle">PEDII</div>
+      <div id="appActions">
+        <button class="miniBtn" id="dataBtn" type="button">Data</button>
+        <button class="miniBtn" id="aiBtn" type="button">👨‍⚕️ Senior</button>
+        <button class="miniBtn iconBtn" id="undoBtn" type="button" title="Undo">↶</button>
+        <button class="miniBtn iconBtn" id="redoBtn" type="button" title="Redo">↷</button>
+        <button class="miniBtn trashBtn" id="deleteBtn" type="button" title="Delete" disabled>🗑</button>
+        <div id="moreWrap">
+          <button class="miniBtn iconBtn" id="moreBtn" type="button" title="Menu">⋮</button>
+          <div id="moreMenu">
+            <button class="menuIcon" type="button" id="viewPdfBtn" title="View PDF">👁</button>
+            <button class="menuIcon" type="button" id="downloadPdfBtn" title="Download PDF">⬇</button>
+            <button class="menuIcon" type="button" id="refreshBtn" title="Refresh">⟳</button>
+            <button class="menuIcon" type="button" id="helpBtn" title="Help">?</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="navBar">
+      <button class="navBtn" id="pedigreeBtn" type="button">Pedigree Drawing</button>
+      <button class="navBtn" id="whatBtn" type="button">What is Pedigree</button>
+      <button class="navBtn small" id="whatDownloadBtn" type="button" title="Download What is Pedigree PDF">⬇</button>
+      <button class="navBtn" id="patternBtn" type="button">Pattern of Genetic Inheritance</button>
+      <button class="navBtn small" id="patternDownloadBtn" type="button" title="Download Pattern PDF">⬇</button>
+      <button class="navBtn" id="aboutBtn" type="button">About / Privacy</button>
+    </div>
+  </div>
+
+  <div id="dataSheet">
+    <div id="dataGrid">
+      <div class="field"><label>Institution / College</label><input id="hospitalName" placeholder="Institution or College" /></div>
+      <div class="field"><label>Study / Case ID</label><input id="opdNo" placeholder="Study / Case ID" /></div>
+      <div class="field"><label>Date</label><input id="date" type="date" /></div>
+      <div class="field"><label>Examiner / Supervisor</label><input id="doctorName" placeholder="Examiner or Supervisor" /></div>
+      <div class="field"><label>Subject / Sample Code</label><input id="patientName" placeholder="Subject or Sample Code" /></div>
+      <div class="field"><label>Age (optional)</label><input id="age" placeholder="Age (optional)" /></div>
+      <div class="field"><label>Sex (optional)</label><input id="sex" placeholder="Sex (optional)" /></div>
+      <div class="field"><label>Family History Note</label><input id="address" placeholder="Family history note" /></div>
+      <div class="field"><label>Reference Note</label><input id="mobile" placeholder="Reference note" /></div>
+      <div class="field"><label>Observation / Learning Note</label><input id="diagnosis" placeholder="Observation or learning note" /></div>
+      <div class="field"><label>Purpose / Context</label><input id="reason" placeholder="Purpose or context" /></div>
+    </div>
+    <div class="sheetNotice">
+      Use sample, fictional, or de-identified information only. Do not enter real patient names, contact details, diagnosis, or address data.
+    </div>
+    <div class="sheetActions">
+      <button class="miniBtn" id="saveBtn" type="button">Save</button>
+      <button class="miniBtn" id="loadBtn" type="button">Load</button>
+      <button class="miniBtn" id="closeDataBtn" type="button">Close Data</button>
+      <input type="file" id="loadFile" hidden />
+    </div>
+  </div>
+
+  <div id="canvas" aria-label="Pedigree canvas">
+    <div id="drawGate">
+      <strong>ATTENTION</strong>
+      This app is for educational use only. Please read and accept to start drawing. Do not enter real patient-identifiable information.
+      <label><input type="checkbox" id="acceptDraw"> I have read and accept</label>
+    </div>
+  </div>
+  <div id="exportStage"></div>
+
+  <div id="infoPanel">
+    <div id="infoHeader">
+      <div id="infoTitle">About / Privacy</div>
+      <button class="miniBtn iconBtn" id="infoCloseBtn" type="button" title="Close">×</button>
+    </div>
+
+    <h3>👋 Introduction</h3>
+    <p>PEDII is an educational pedigree drawing and learning tool for medical and biology students. It is designed for visualization, teaching, and practice, not for diagnosis or clinical decision-making.</p>
+
+    <h3>💡 Project Background</h3>
+    <p>This application was created to help users understand pedigree symbols, inheritance patterns, and chart structure in a simple, mobile-friendly interface.</p>
+
+    <h3>📊 App Purpose</h3>
+    <ul>
+      <li>Learn pedigree chart concepts</li>
+      <li>Understand genetic inheritance patterns</li>
+      <li>Draw and visualize pedigree diagrams easily</li>
+      <li>Save or load diagrams as local files</li>
+    </ul>
+
+    <h3>⚙️ Development</h3>
+    <p>This application has been built using modern web technologies with a focus on simplicity, clarity, and ease of use.</p>
+
+    <h3>⚠️ Disclaimer</h3>
+    <p>This app is strictly intended for educational purposes only. It does not diagnose, detect, prevent, or treat any disease or medical condition. Users should consult qualified healthcare professionals for any medical concerns.</p>
+
+    <h3>🔒 Privacy & Data Use</h3>
+    <ul>
+      <li>No account is required.</li>
+      <li>No analytics or tracking are built in.</li>
+      <li>Save and load work through local files on the device.</li>
+      <li>Do not enter real patient-identifiable information.</li>
+      <li>For Play Store submission, publish a public privacy policy URL and link it in the store listing.</li>
+    </ul>
+
+    <h3>🎯 Objective</h3>
+    <p>Through this project, the goal is to combine academic knowledge with technical skills to create a simple educational tool for pedigree learning.</p>
+  </div>
+
+  <div id="aiPanel">
+    <div id="aiPanelHeader">
+      <div>Senior Expert Genetic Analysis</div>
+      <button class="miniBtn iconBtn" id="aiCloseBtn" type="button" title="Close">×</button>
+    </div>
+    <div id="aiBody">Tap Senior to analyze parent-to-child transmission in the pedigree.</div>
+    <div style="margin-top:8px; display:flex; gap:6px;">
+      <button class="miniBtn" id="aiRunBtn" type="button" style="flex:1;">Run Analysis</button>
+    </div>
+  </div>
+
+  <div id="panel" aria-label="Selected individual panel">
+    <div id="panelHeader">
+      <div>Selected Individual</div>
+      <button class="miniBtn iconBtn" id="panelCloseBtn" type="button" title="Close">×</button>
+    </div>
+
+    <label><input type="checkbox" id="pAffected" /> Affected symptoms</label>
+    <div class="row">
+      <strong>Symptoms</strong>
+      <input type="number" id="pSymCount" value="1" min="1" max="5" />
+    </div>
+    <label><input type="checkbox" id="pDeath" /> Death</label>
+    <label><input type="checkbox" id="pStill" /> Stillbirth</label>
+    <label><input type="checkbox" id="pProband" /> Proband</label>
+    <label><input type="checkbox" id="pConsult" /> Consultand</label>
+    <label><input type="checkbox" id="pDocEval" /> Documented Eval</label>
+    <label><input type="checkbox" id="pCarrier" /> Carrier</label>
+    <label><input type="checkbox" id="pAsymp" /> Asymptomatic</label>
+
+    <div style="margin-top:6px;font-size:11px;font-weight:700;">Comment</div>
+    <input id="pComment" type="text" placeholder="Type comment" />
+
+    <div class="applyRow">
+      <button class="miniBtn" id="applyBtn" type="button">Apply</button>
+      <button class="miniBtn" id="hidePanelBtn" type="button">Hide</button>
+    </div>
+
+  </div>
+
+  <div id="bottomDrawer">
+    <div id="drawerHandle">
+      <div id="drawerTitle">
+        <strong>Pedigree Tools</strong>
+        <span>Tap to expand symbols upward</span>
+      </div>
+      <button class="miniBtn" id="toggleToolsBtn" type="button">Tools</button>
+    </div>
+    <div id="drawerTools">
+      <div class="toolSection">Signs</div>
+      <div id="toolGrid"></div>
+      <div class="toolSection">Lines</div>
+      <div id="lineToolGrid"></div>
+      <div class="toolSection">Special</div>
+      <div id="specialToolGrid"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <script src="script.js"></script>
+</body>
+</html>
